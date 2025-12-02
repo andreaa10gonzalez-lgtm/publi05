@@ -133,8 +133,8 @@
   <div class="wrapper">
 
     <div class="logos">
-      <div class="logo-item"><img src="logo bet22.webp" alt=""></div>
-      <div class="logo-item"><img src="ganamos logo.webp" alt=""></div>
+      <div class="logo-item"><img src="logo bet22.webp"></div>
+      <div class="logo-item"><img src="ganamos logo.webp"></div>
     </div>
 
     <section class="card">
@@ -144,15 +144,15 @@
       <h1 class="title">Súper bono <span>de bienvenida</span></h1>
       <p class="subtitle">Escribinos por WhatsApp y activá tu usuario con bono especial.</p>
 
-      <!-- HREF DE RESPALDO: SI FALLA SHEETS, IGUAL ABRE -->
+      <!-- BOTÓN DE RESPALDO -->
       <a
         id="btn-whatsapp"
         class="btn-whatsapp"
-        href="https://api.whatsapp.com/send?phone=541151137549&text=Hola%20quiero%20un%20usuario&type=phone_number&app_absent=0"
+        href="https://api.whatsapp.com/send?phone=5491111111111&text=Hola%20quiero%20un%20usuario&type=phone_number&app_absent=0"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
         WHATSAPP OFFICIAL
       </a>
 
@@ -167,7 +167,7 @@
       </div>
 
       <div class="games-image">
-        <img src="juegos.jpeg" alt="">
+        <img src="juegos.jpeg">
       </div>
 
       <p class="footer">© 2025 • Juego +18</p>
@@ -175,16 +175,16 @@
     </section>
   </div>
 
-  <!-- SCRIPT DE WHATSAPP DINÁMICO -->
+  <!-- SCRIPT WHATSAPP DINÁMICO -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
 
       var btn = document.getElementById('btn-whatsapp');
       if (!btn) return;
 
-      // CSV publicado de tu Google Sheets
+      // 👉 NUEVO CSV DEL CLIENTE
       var SHEET_CSV_URL =
-        "https://docs.google.com/spreadsheets/d/e/2PACX-1vSQ2hUIneRrO-OFihhGhbSSALOtpgG4Dhrbjd1CBt1-ICNZSbKHmIYQiMYzQNa0-y-cUuyy61FMYdAT/pubhtml?gid=0&single=csv";
+        "https://docs.google.com/spreadsheets/d/e/2PACX-1vSQ2hUIneRrO-OFihhGhbSSALOtpgG4Dhrbjd1CBt1-ICNZSbKHmIYQiMYzQNa0-y-cUuyy61FMYdAT/pub?gid=0&output=csv";
 
       var DEFAULT_MESSAGE = "Hola quiero un usuario";
 
@@ -195,7 +195,7 @@
           .replace(/[^\d]/g, "");
 
         if (!limpio) {
-          console.warn("Número inválido, uso el respaldo.");
+          console.warn("Número inválido, uso respaldo.");
           return;
         }
 
@@ -207,19 +207,17 @@
           "&type=phone_number&app_absent=0";
 
         btn.href = url;
-        console.log("Número actualizado a:", url);
+        console.log("WhatsApp actualizado:", url);
       }
 
       fetch(SHEET_CSV_URL)
-        .then(function (res) { return res.text(); })
-        .then(function (texto) {
+        .then(res => res.text())
+        .then(texto => {
           var primeraLinea = texto.split("\n")[0] || "";
           var primeraCelda = primeraLinea.split(",")[0] || "";
           actualizarHref(primeraCelda);
         })
-        .catch(function (err) {
-          console.error("Error cargando número:", err);
-        });
+        .catch(err => console.error("Error cargando número:", err));
 
       btn.addEventListener("click", function () {
         if (typeof fbq === "function") {
